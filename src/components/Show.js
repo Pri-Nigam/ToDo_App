@@ -5,7 +5,7 @@ import pen from './images/pencil-fill.svg';
 import {Link} from 'react-router-dom';
 
 
-function Show({data,setData}) {
+function Show({data, handleDelete}) {
   const {id} = useParams();
   let variable = null;
 
@@ -14,13 +14,6 @@ function Show({data,setData}) {
       variable = element;
     } 
   });
-
-  const handleDelete = (id) => {
-    setData(data.filter(obj => obj.id !== id));
-    console.log('first')
-    console.log(data)
-  }
-
 
   return (
     <>
@@ -49,4 +42,4 @@ function Show({data,setData}) {
   )
 }
 
-export default Show
+export default Show;

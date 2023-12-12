@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams, usenav } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateDetails = (props) => {
     const {data,setData} = props;
@@ -36,7 +36,7 @@ const UpdateDetails = (props) => {
                 item.id === formData.id ? { ...item, ...formData } : item
             )
             );
-            nav(`/detail/${formData.id}`);
+            nav(`/table`);
         }
     };
 

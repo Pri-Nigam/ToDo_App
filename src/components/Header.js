@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Details from './Details';
 import { useState } from 'react';
 import Table from './Table';
@@ -8,10 +8,31 @@ import UpdateDetails from './UpdateDetails';
 
 function Header() {
   const [data, setData] = useState([]);
+  let nav = useNavigate();
+// cosnt single
+//   const handleDelete = (id) => {
+//     alert(`id ${id}`)
+//   }
+
+//   const getDataById = (id) => {
+
+//   }
+
+//   cosnt updateData = (data) => {
+
+//   }
+
+
+  //api implemnt in use effect ..
+  const handleDelete = (id) => {
+    console.log(id)
+    setData(data.filter(obj => obj.id !== id));
+    console.log('first')
+    nav(`/table`);
+  }
 
   return (
     <div className="header">
-      <Router>
         <div className="d-flex justify-content-between align-items-center">
             <div>
               <h1>ToDo App</h1>
@@ -28,12 +49,11 @@ function Header() {
 
           <Routes>
           <Route path="/"></Route>
-          <Route path="/details" element={<Details setData={setData} />} />
-          <Route path="/table" element={<Table data={data} setData={setData} />} />
-          <Route path="/show/:id" element={<Show data={data} setData={setData}/>} />
+          <Route path="/details" element={<Details setData={setData}/>} />
+          <Route path="/table" element={<Table data={data} handleDelete={handleDelete}/>} />
+          <Route path="/show/:id" element={<Show data={data} handleDelete={handleDelete}/>} />
           <Route path="/updateDetails/:id" element={<UpdateDetails data={data} setData={setData} />} />
         </Routes>
-      </Router>
     </div>
   );
 }

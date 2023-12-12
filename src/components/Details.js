@@ -10,6 +10,12 @@ function Details(props) {
     date: ''
   });
 
+
+  // useEffect(() => {
+  //   if(props.isEdit) {
+  //     setFormData(pr)
+  //   }
+  // })
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -17,9 +23,10 @@ function Details(props) {
       return;
     }
 
+    // props.isEdit ? updateData(formData): setData
+
     setData((prev) => [...prev, formData]);
     console.log("-------", formData);
-
     setFormData({
       id: '',
       name: '',

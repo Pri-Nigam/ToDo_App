@@ -4,13 +4,7 @@ import logo from './images/eyeglasses.svg';
 import trash from './images/trash-fill.svg';
 import pen from './images/pencil-fill.svg'
 
-function Table({data, setData}) {
-  // const {data, setData} = props;
-  const handleDelete = (id) => {
-    setData(data.filter(obj => obj.id !== id));
-    console.log('first')
-    console.log(data)
-  }
+function Table({data,handleDelete}) {
 
   return (
     <div className="container" style={{display:"flex", justifyContent:"center"}}>
