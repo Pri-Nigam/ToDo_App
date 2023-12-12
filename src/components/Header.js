@@ -9,10 +9,6 @@ import UpdateDetails from './UpdateDetails';
 function Header() {
   const [data, setData] = useState([]);
   let nav = useNavigate();
-// cosnt single
-//   const handleDelete = (id) => {
-//     alert(`id ${id}`)
-//   }
 
 //   const getDataById = (id) => {
 
@@ -48,11 +44,11 @@ function Header() {
           </div>
 
           <Routes>
-          <Route path="/"></Route>
-          <Route path="/details" element={<Details setData={setData}/>} />
-          <Route path="/table" element={<Table data={data} handleDelete={handleDelete}/>} />
-          <Route path="/show/:id" element={<Show data={data} handleDelete={handleDelete}/>} />
-          <Route path="/updateDetails/:id" element={<UpdateDetails data={data} setData={setData} />} />
+            <Route path="/"></Route>
+            <Route path="/details" element={<Details setData={setData}/>} />
+            <Route path="/table" element={<Table data={data} handleDelete={handleDelete}/>} />
+            <Route path="/show/:id" element={<Show data={data} handleDelete={handleDelete}/>} />
+            <Route path="/updateDetails/:id" element={<UpdateDetails data={data} setData={setData} />} />
         </Routes>
     </div>
   );
