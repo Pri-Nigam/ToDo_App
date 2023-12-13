@@ -91,7 +91,14 @@ function Details(props) {
     const currentDate = new Date();
     const selectedDate = new Date(formData.date);
 
-    if (selectedDate < currentDate) {
+    if (formData.date.trim() === '') {
+      setValidationMessages({
+        ...validationMessages,
+        date: 'Date is required.'
+      });
+      return false;
+    }
+    else if (selectedDate < currentDate) {
       setValidationMessages({
         ...validationMessages,
         date: 'Date should be present or in the future.'

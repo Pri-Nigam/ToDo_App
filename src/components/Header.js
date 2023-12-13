@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Details from './Details';
 import { useState } from 'react';
 import Table from './Table';
@@ -30,10 +30,10 @@ function Header() {
   return (
     <div className="header">
         <div className="d-flex justify-content-between align-items-center">
-            <div>
+            <div style={{margin: '12px'}}>
               <h1>ToDo App</h1>
             </div>
-            <div className="d-flex my-4">
+            <div className="d-flex my-4 mx-3">
               <div className="ms-2">
                 <Link to="/details" className="btn btn-primary">Add Details</Link>
               </div>
