@@ -1,14 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate, useParams } from "react-router-dom";
+
 
 function Details(props) {
-  const { setData } = props;
-  const [formData, setFormData] = useState({
+  const { data, setData, isEdit } = props;
+  const {id} = useParams();
+  const nav = useNavigate();
+  let item = null;
+
+  const [initialData, setInitialData] = useState({
     id: '',
     name: '',
     desc: '',
-    date: ''
+    date: '',
   });
+
+  useEffect(() => {
+    const item = data.find((i) => i.id === id);
+
+    if (item) {
+      setInitialData({
+        id: item.id,
+        name: item.name,
+        desc: item.desc,
+        date: item.date,
+      });
+    }
+  }, [data, id]);
+
+  const [formData, setFormData] = useState(
+    isEdit
+      ? {
+          id: id,
+          name: initialData.name,
+          desc: initialData.desc,
+          date: initialData.date,
+        }
+      : {
+          id: '',
+          name: '',
+          desc: '',
+          date: '',
+        }
+  );
+
+
+
+  // useEffect(()=> {
+  //   data.forEach(i => {
+  //     if (i.id === id) {
+  //     item = i;
+  //     }
+  //   });
+  // },[])
+
+  // const [formData, setFormData] = useState(
+  //   isEdit
+  //     ? {
+  //         id: id,
+  //         name: item?.name,
+  //         desc: item?.desc,
+  //         date: item?.date,
+  //       }
+  //     : {
+  //         id: '',
+  //         name: '',
+  //         desc: '',
+  //         date: '',
+  //       }
+  // );
+
   const [validationMessages, setValidationMessages] = useState({
     id: '',
     name: '',
@@ -23,21 +85,30 @@ function Details(props) {
       return;
     }
 
-    setData((prev) => [...prev, formData]);
-    console.log("-------", formData);
-    setFormData({
-      id: '',
-      name: '',
-      desc: '',
-      date: ''
-    });
+    if (isEdit) {
+      setData((prevData) =>
+        prevData.map((item) =>
+          item.id === formData.id ? { ...item, ...formData } : item
+        )
+      );
+      nav(`/table`);
+    } else {
+      setData((prev) => [...prev, formData]);
 
-    setValidationMessages({
-      id: '',
-      name: '',
-      desc: '',
-      date: ''
-    });
+      setFormData({
+        id: '',
+        name: '',
+        desc: '',
+        date: ''
+      });
+
+      setValidationMessages({
+        id: '',
+        name: '',
+        desc: '',
+        date: ''
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -98,6 +169,7 @@ function Details(props) {
       });
       return false;
     }
+
     else if (selectedDate < currentDate) {
       setValidationMessages({
         ...validationMessages,
@@ -166,7 +238,10 @@ function Details(props) {
 }
 
 Details.propTypes = {
-  setData: PropTypes.func.isRequired
+  setData: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired
 };
 
 export default Details;

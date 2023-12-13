@@ -4,7 +4,7 @@ import logo from './images/eyeglasses.svg';
 import trash from './images/trash-fill.svg';
 import pen from './images/pencil-fill.svg'
 
-function Table({data,handleDelete}) {
+function Table({data,handleDelete, setIsEdit}) {
 
   return (
     <div className="container" style={{display:"flex", justifyContent:"center"}}>
@@ -33,7 +33,9 @@ function Table({data,handleDelete}) {
                 <td>
                   <Link className='btn btn-primary'to={`/show/${item.id}`}><img src={logo}></img></Link>
                   <button className='btn btn-danger' onClick={() => handleDelete(item.id)}><img src={trash}></img></button>
-                  <Link className='btn btn-success' to={`/updateDetails/${item.id}`}><img src={pen}></img></Link>
+                  {/* <Link className='btn btn-success' onClick={()=> setIsEdit(true)}to={`/updateDetails/${item.id}`}><img src={pen}></img></Link> */}
+                  <Link className='btn btn-success' onClick={()=> setIsEdit(true)}to={`/details/${item.id}`}><img src={pen}></img></Link>
+
                 </td>
               </tr>
             ))}

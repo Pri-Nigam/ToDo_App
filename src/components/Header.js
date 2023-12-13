@@ -1,13 +1,17 @@
 import React from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import Details from './Details';
 import { useState } from 'react';
+
+import Details from './Details';
 import Table from './Table';
 import Show from './Show';
-import UpdateDetails from './UpdateDetails';
+// import UpdateDetails from './UpdateDetails';
+
+
 
 function Header() {
   const [data, setData] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
   let nav = useNavigate();
 
 //   const getDataById = (id) => {
@@ -35,7 +39,7 @@ function Header() {
             </div>
             <div className="d-flex my-4 mx-3">
               <div className="ms-2">
-                <Link to="/details" className="btn btn-primary">Add Details</Link>
+                <Link to="/details/:id" className="btn btn-primary">Add Details</Link>
               </div>
               <div className="ms-2">
                 <Link to="/table" className="btn btn-primary">Home</Link>
@@ -45,10 +49,10 @@ function Header() {
 
           <Routes>
             <Route path="/"></Route>
-            <Route path="/details" element={<Details setData={setData}/>} />
-            <Route path="/table" element={<Table data={data} handleDelete={handleDelete}/>} />
+            <Route path="/details/:id" element={<Details data={data} setData={setData} isEdit={isEdit}/>} />
+            <Route path="/table" element={<Table data={data} handleDelete={handleDelete} setIsEdit={setIsEdit}/>} />
             <Route path="/show/:id" element={<Show data={data} handleDelete={handleDelete}/>} />
-            <Route path="/updateDetails/:id" element={<UpdateDetails data={data} setData={setData} />} />
+            {/* <Route path="/updateDetails/:id" element={<UpdateDetails data={data} setData={setData}/>} /> */}
         </Routes>
     </div>
   );

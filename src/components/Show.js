@@ -10,7 +10,7 @@ function Show({data, handleDelete}) {
   let variable = null;
 
   data.forEach(element => {
-    if (element.id == id) {
+    if (element.id === id) {
       variable = element;
     } 
   });
@@ -20,9 +20,6 @@ function Show({data, handleDelete}) {
       <div className='container' style={{display:"flex", justifyContent:"center"}}>
         <div class="card mb-3" style={{width: '30rem'}}>
           <div class="row g-0">
-            {/* <div class="col-md-4">
-              <img src="..." class="img-fluid rounded-start" alt="..."/>
-            </div> */}
             <div class="col-md-8">
               <div class="card-body">
                 <p class="card-text"><small class="text-body-secondary">{variable.id}</small></p>
@@ -36,7 +33,7 @@ function Show({data, handleDelete}) {
       </div>
       <div className="container" style={{display:"flex", justifyContent:"center", marginLeft: '78px'}}>
         <button className='btn btn-danger' onClick={() => handleDelete(variable.id)}><img src={trash}></img></button>
-        <Link className='btn btn-success mx-2' to={`/updateDetails/${variable.id}`}><img src={pen}></img></Link>
+        <Link className='btn btn-success mx-2' to={`/details/${variable.id}`}><img src={pen}></img></Link>
       </div>
     </>
   )
